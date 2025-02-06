@@ -12,6 +12,9 @@ public class Petshop {
         this.petBathingService = petBathingService;
     }
 
+    public String getName() {
+        return this.name;
+    }
     public void executeBath(Pet pet) {
         System.out.println("Petshop " + name + " realizando banho o Pet " + pet.getName());
 
