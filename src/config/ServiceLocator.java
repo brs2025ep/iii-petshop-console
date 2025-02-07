@@ -1,6 +1,6 @@
 package config;
 
-import devices.PetBathManchine;
+import models.Machine;
 import services.PetBathingService;
 
 public class ServiceLocator {
@@ -8,7 +8,7 @@ public class ServiceLocator {
 
     public static PetBathingService getPetBathingService() {
         if (petBathingService == null) {
-            petBathingService = new PetBathingService(new PetBathManchine());
+            petBathingService = new PetBathingService(new Machine());
         }
 
         return petBathingService;

@@ -1,18 +1,13 @@
-import factories.PetshopFactory;
-import models.Pet;
-import models.Petshop;
-import util.PetBathServiceMenuUtil;
+import util.BathServiceMenuUtil;
+import util.MachineUtil;
 import util.PetUtil;
 import util.PetsManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Petshop petshop = PetshopFactory.buildPetshop("Petshop da Dona Maria");
         PetsManager manager = new PetsManager();
 
         manager.addPet("Spike");
@@ -23,7 +18,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Serviço de Banho Pet " + petshop.getName());
+        System.out.println("Serviço de Banho Pet " );
         System.out.println("1 - Cadastrar Novo Pet para Banho");
         System.out.println("2 - Exibir Fila de Pets");
         System.out.println("3 - Serviço de Banho Pet");
@@ -43,7 +38,7 @@ public class Main {
                 break;
             case 3:
                 System.out.println("3 - Serviço de Banho Pet");
-                PetBathServiceMenuUtil.displayPetMenu(scanner);
+                BathServiceMenuUtil.displayPetMenu(scanner);
                 break;
             case 4:
                 System.out.println("Saindo...");

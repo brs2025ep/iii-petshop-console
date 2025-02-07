@@ -35,8 +35,6 @@ public class PetUtil {
 
         petList.stream().filter(
                 i -> i.getId() == petId
-        ).findFirst().ifPresent(selectedPet -> System.out.println("\n Enviando pet:"));
-
-        System.out.println("\nPet enviado pet:");
+        ).findFirst().ifPresent(selectedPet -> System.out.println("\n Enviando pet: " + selectedPet.getId() + " - "+ selectedPet.toString()));
     }
 }
