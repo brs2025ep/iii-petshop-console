@@ -19,23 +19,22 @@ public class MachineUtil {
         System.out.println(machine.getWaterTankLevel() + "litros de água");
 
         if(machine.getWaterTankLevel() <30 ) {
-            machine.fillWaterTank();
+            fillWaterTank(machine);
             System.out.println("\nO tanque de Água aumentou 2 litros e agora tem :" + machine.getWaterTankLevel());
         }
 
         if(machine.getShampooTankLevel() <30 ) {
-            machine.fillShampooTank();
+            fillShampooTank(machine);
             System.out.println("\nO tanque de Shampoo aumentou 2 litros e agora tem :" + machine.getShampooTankLevel());
         }
     }
 
     public static String checkVacancy(Scanner scanner, Machine machine) {
-        machine.isMachineFull();
-        return "A máquina está vazia";
+        return (machine.getPetInside() != null) ? "A máquina não está vazia" : "A máquina está vazia";
     }
 
     public static void placePetInside(Scanner scanner, Machine machine, List<Pet> pets) {
-       if (machine.isMachineFull()) {
+       if (machine.getPetInside() !=null) {
            System.out.println("Falha: A máquina está lotada");
         }
 
@@ -57,22 +56,61 @@ public class MachineUtil {
         System.out.println("Sucesso: O pet foi para a máquina");
     }
 
-    public static void startBath(Scanner scanner, Machine machine) {
+    public static void takePetFromMachine(Scanner scanner, Machine machine) {
         if (machine.getPetInside() == null) {
-            System.out.println("Falha: Nenhum pet foi colocado na máquina");
+            System.out.println("A máquina já está vazia");
+        }
+        if (machine.isMachineOn()) {
+            interruptBath(machine);
+        }
+        machine.setPetInside(null);
+    }
+
+    public static void fillWaterTank(Machine machine) {
+        int newWaterLevel = machine.getWaterTankLevel() + 2;
+        machine.setWaterTankLevel(newWaterLevel);
+    }
+
+    public static void fillShampooTank(Machine machine) {
+        int newShampooLevel =  machine.getShampooTankLevel() + 2;
+        machine.setShampooTankLevel(newShampooLevel);
+    }
+
+    public static void startBathProcess(Scanner scanner, Machine machine) {
+        if (machine.getPetInside() == null) {
+            System.out.println("\nFalha: Não tem nenhum pet para banho no interior da máquina");
             return;
         }
 
-        if (machine.isMachineDirt()) {
-            System.out.println("Falha: A máquina está suja");
+        int waterConsumption = machine.getWaterConsumption();
+        int waterTankLevel = machine.getWaterTankLevel();
+        int shampooConsumption = machine.getShampooConsumption();
+        int shampooTankLevel = machine.getShampooTankLevel();
+
+        if (waterTankLevel < waterConsumption || shampooTankLevel < shampooConsumption) {
+            System.out.println("\nFalha: Nível insuficiente. \nÁgua:" + waterTankLevel + "\nShampoo:" + shampooTankLevel );
             return;
         }
-        System.out.println("Banhando pet");
+
+        startBath(machine);
+        finishBath(machine);
     }
-    public static void takePetFromMachine(Scanner scanner, Machine machine) {
-        if (!machine.isMachineFull()) {
-            System.out.println("A máquina já está vazia");
-        }
-        machine.retrievePetFromInside();
+
+    public static void startBath(Machine machine) {
+        System.out.println("Banhando pet");
+        machine.setMachineOn(true);
+    }
+
+    public static void interruptBath(Machine machine) {
+        System.out.println("O banho foi interrompido!");
+        machine.setMachineOn(false);
+
+        System.out.println("A máquina está suja e precisa ser limpa!");
+        machine.setMachineDirt(true);
+    }
+
+    public static void finishBath(Machine machine) {
+        System.out.println("Banho pet completo!");
+        machine.setMachineOn(true);
     }
 }

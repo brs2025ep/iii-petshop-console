@@ -44,7 +44,7 @@ public class BathServiceMenuUtil {
                     break;
                 case 4:
                     System.out.println("4 - Banhar pet");
-                    MachineUtil.startBath(scanner, machine, petsManager.getCurrentPet());
+                    MachineUtil.startBathProcess(scanner, machine);
                     break;
                 case 5:
                     System.out.println("5 - Limpar máquina");
