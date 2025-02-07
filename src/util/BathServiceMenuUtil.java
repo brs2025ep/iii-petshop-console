@@ -1,14 +1,16 @@
 package util;
 
 import models.Machine;
+import models.Pet;
 
+import java.util.List;
 import java.util.Scanner;
 
 
 public class BathServiceMenuUtil {
 
-    public static void displayPetMenu(Scanner scanner) {
-        int value;
+    public static void displayPetMenu(Scanner scanner, Machine machine, List<Pet> pets) {
+        int option;
         do {
             System.out.println("\nServiços de Banho Pet");
             System.out.println("1 - Colocar pet na máquina;");
@@ -24,13 +26,13 @@ public class BathServiceMenuUtil {
             System.out.println("0 - Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
 
-            value = scanner.nextInt();
+            option = scanner.nextInt();
             scanner.nextLine();
 
-            switch (value) {
+            switch (option) {
                 case 1:
                     System.out.println("1 - Colocar pet na máquina");
-                    MachineUtil.placePetInside(pet);
+                    MachineUtil.placePetInside(scanner, machine, pets);
                     break;
                 case 2:
                     System.out.println("2 - Verificar pet na máquina");
@@ -41,8 +43,8 @@ public class BathServiceMenuUtil {
                     MachineUtil.takePetFromMachine(scanner, machine);
                     break;
                 case 4:
-                    System.out.println("3 - Retirar pet da máquina");
-                    MachineUtil.takePetFromMachine(scanner, machine);
+                    System.out.println("4 - Banhar pet");
+                    MachineUtil.startBath(scanner, machine, pet);
                     break;
                 case 5:
                     System.out.println("5 - Limpar máquina");
@@ -57,6 +59,6 @@ public class BathServiceMenuUtil {
                 default:
                     System.out.println("Opção inválida.");
             }
-        } while (opcao != 0);
+        } while (option != 0);
     }
 }

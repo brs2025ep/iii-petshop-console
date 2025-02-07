@@ -1,38 +1,51 @@
 package models;
 
 
-import java.util.List;
-import java.util.Scanner;
-import models.Pet;
+import java.util.Map;
 
 public class Machine {
 
-    private int waterTankLevel = 30;
-    private int shampooTankLevel = 10;
+    private Map<String, Integer> level = Map.of(
+            "water", 30,
+            "shampoo", 10
+    );
+    private Map<String, Integer> consumption = Map.of(
+            "water", 10,
+            "shampoo", 2
+    );
     private boolean machineDirt = false;
     private Pet petInside = null;
 
     public int getWaterTankLevel() {
-        return this.waterTankLevel;
+        return this.level.get("water");
     }
 
     public int getShampooTankLevel() {
-        return this.shampooTankLevel;
+        return this.level.get("shampoo");
     }
 
     public void fillWaterTank() {
-        this.waterTankLevel += 2;
+        int waterIncremet = 2;
+        int currentWaterLevel = this.consumption.get("water");
+        int newWaterLevel = currentWaterLevel + waterIncremet;
+
+        consumption.put("water", newWaterLevel);
     }
 
     public void fillShampooTank() {
-        this.shampooTankLevel += 2;
+        int shampooIncremet = 2;
+        int currentWaterLevel = this.consumption.get("shampoo");
+        int newWaterLevel = currentWaterLevel + shampooIncremet;
+
+        consumption.put("shampoo", newWaterLevel);
     }
 
-    public void executeBathFromMachine(Pet pet) {
-        System.out.println("Banhando o pet " + pet.getName());
-    };
+    public void startBathProcess() {
+        if (getWaterTankLevel() < 10 || getShampooTankLevel() < 2) {
+            System.out.println("\nFalha: Nível insuficiente. \nÁgua:" + getWaterTankLevel() + "\n Shampoo:" + getShampooTankLevel());
+        }
+    }
 
-    // 7 - Colocar pet no interior da máquina
     public void placePetInside(Pet pet) {
         this.petInside = pet;
     }
@@ -46,7 +59,10 @@ public class Machine {
     }
 
     public boolean isMachineFull () {
-        return petInside
+        if (petInside == null) {
+            return false;
+        }
+        return true;
     }
 
     public void setMachineDirt(boolean state) {

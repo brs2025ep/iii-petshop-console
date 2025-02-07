@@ -1,14 +1,13 @@
-import util.BathServiceMenuUtil;
-import util.MachineUtil;
-import util.PetUtil;
-import util.PetsManager;
+import util.*;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        PetsManager manager = new PetsManager();
+        PetsManager petManager = new PetsManager();
+        MachineManager machineManager = new MachineManager();
+
 
         manager.addPet("Spike");
         manager.addPet("Lup");
@@ -34,11 +33,11 @@ public class Main {
                 break;
             case 2:
                 System.out.println("2 - Listando Pets");
-                PetUtil.displayPetList(manager.getPets());
+                PetUtil.displayPetList(petManager.getPets());
                 break;
             case 3:
                 System.out.println("3 - Serviço de Banho Pet");
-                BathServiceMenuUtil.displayPetMenu(scanner);
+                BathServiceMenuUtil.displayPetMenu(scanner, machineManager.getMachine(), petManager.getPets());
                 break;
             case 4:
                 System.out.println("Saindo...");

@@ -13,8 +13,6 @@ public class MachineUtil {
         System.out.println("\nA máquina foi limpa");
     }
 
-
-
     public static void refuelMachine(Scanner scanner, Machine machine) {
         System.out.println("\nA máquina tem :");
         System.out.println(machine.getShampooTankLevel() + " litros de shampoo");
@@ -36,21 +34,29 @@ public class MachineUtil {
         return "A máquina está vazia";
     }
 
-    public static String placePetInside(Scanner scanner, Machine machine) {
+    public static void placePetInside(Scanner scanner, Machine machine, List<Pet> pets) {
        if (machine.isMachineFull()) {
-             return "Falha: A máquina está lotada";
+           System.out.println("Falha: A máquina está lotada");
         }
 
        if (machine.isMachineDirt()) {
-           return "Falha: A máquina está suja.";
+           System.out.println("Falha: A máquina está suja");
        }
 
-        machine.placePetInside();
+       // TODO: SELECT PET
+
+       Pet selectedPet = new Pet("no name");
+        machine.placePetInside(selectedPet);
         System.out.println("Sucesso: O pet foi para a máquina");
     }
 
-    public static void takePetFromMachine(Scanner scanner, Machine machine, Pet pet) {
-        machine.retrievePetFromInside(pet);
+    public static void startBath(Scanner scanner, Machine machine, Pet pet) {
+        System.out.println("Banhando pet");
     }
-
+    public static void takePetFromMachine(Scanner scanner, Machine machine) {
+        if (!machine.isMachineFull()) {
+            System.out.println("A máquina já está vazia");
+        }
+        machine.retrievePetFromInside();
+    }
 }
