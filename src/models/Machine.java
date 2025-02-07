@@ -46,7 +46,11 @@ public class Machine {
         }
     }
 
-    public void placePetInside(Pet pet) {
+    public Pet getPetInside() {
+        return this.petInside = petInside;
+    }
+
+    public void setPetInside(Pet pet) {
         this.petInside = pet;
     }
 

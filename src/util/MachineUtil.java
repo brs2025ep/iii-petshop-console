@@ -43,14 +43,30 @@ public class MachineUtil {
            System.out.println("Falha: A máquina está suja");
        }
 
-       // TODO: SELECT PET
+        System.out.println("\nListando Pets Cadastrados");
+        pets.forEach(System.out::println);
 
-       Pet selectedPet = new Pet("no name");
-        machine.placePetInside(selectedPet);
+        System.out.print("Insira o ID do Pet: ");
+
+        int petId = scanner.nextInt();
+
+        pets.stream().filter(
+                i -> i.getId() == petId
+        ).findFirst().ifPresent(machine::setPetInside);
+
         System.out.println("Sucesso: O pet foi para a máquina");
     }
 
-    public static void startBath(Scanner scanner, Machine machine, Pet pet) {
+    public static void startBath(Scanner scanner, Machine machine) {
+        if (machine.getPetInside() == null) {
+            System.out.println("Falha: Nenhum pet foi colocado na máquina");
+            return;
+        }
+
+        if (machine.isMachineDirt()) {
+            System.out.println("Falha: A máquina está suja");
+            return;
+        }
         System.out.println("Banhando pet");
     }
     public static void takePetFromMachine(Scanner scanner, Machine machine) {

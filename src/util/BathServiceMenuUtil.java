@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class BathServiceMenuUtil {
 
-    public static void displayPetMenu(Scanner scanner, Machine machine, List<Pet> pets) {
+    public static void displayPetMenu(Scanner scanner, Machine machine, PetsManager petsManager) {
         int option;
         do {
             System.out.println("\nServiços de Banho Pet");
@@ -32,7 +32,7 @@ public class BathServiceMenuUtil {
             switch (option) {
                 case 1:
                     System.out.println("1 - Colocar pet na máquina");
-                    MachineUtil.placePetInside(scanner, machine, pets);
+                    MachineUtil.placePetInside(scanner, machine, petsManager.getPets());
                     break;
                 case 2:
                     System.out.println("2 - Verificar pet na máquina");
@@ -44,7 +44,7 @@ public class BathServiceMenuUtil {
                     break;
                 case 4:
                     System.out.println("4 - Banhar pet");
-                    MachineUtil.startBath(scanner, machine, pet);
+                    MachineUtil.startBath(scanner, machine, petsManager.getCurrentPet());
                     break;
                 case 5:
                     System.out.println("5 - Limpar máquina");

@@ -8,12 +8,11 @@ public class Main {
         PetsManager petManager = new PetsManager();
         MachineManager machineManager = new MachineManager();
 
-
-        manager.addPet("Spike");
-        manager.addPet("Lup");
-        manager.addPet("Husk");
-        manager.addPet("Pin");
-        manager.addPet("Flare");
+        petManager.addPet("Spike");
+        petManager.addPet("Lup");
+        petManager.addPet("Husk");
+        petManager.addPet("Pin");
+        petManager.addPet("Flare");
 
         Scanner scanner = new Scanner(System.in);
 
@@ -37,7 +36,7 @@ public class Main {
                 break;
             case 3:
                 System.out.println("3 - Serviço de Banho Pet");
-                BathServiceMenuUtil.displayPetMenu(scanner, machineManager.getMachine(), petManager.getPets());
+                BathServiceMenuUtil.displayPetMenu(scanner, machineManager.getMachine(), petManager);
                 break;
             case 4:
                 System.out.println("Saindo...");

@@ -26,15 +26,4 @@ public class PetUtil {
             System.out.println("ID: " + pet.getId() + " Nome: " + pet.getName() + "Estado: " + pet.getIsClean());
         });
     }
-
-    public static void sendPetToBath(Scanner scanner, List<Pet> petList) {
-        System.out.println("\nListando Pets Cadastrados");
-
-        System.out.print("Insira o ID do Pet: ");
-        int petId = scanner.nextInt();
-
-        petList.stream().filter(
-                i -> i.getId() == petId
-        ).findFirst().ifPresent(selectedPet -> System.out.println("\n Enviando pet: " + selectedPet.getId() + " - "+ selectedPet.toString()));
-    }
 }
